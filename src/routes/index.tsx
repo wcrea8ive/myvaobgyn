@@ -88,7 +88,7 @@ const conditions = [
 
 const heroSlides = [
   { src: "/myvaobgyn-office.png", alt: "MyVA OB/GYN office", text: "Keeping women healthy at every life stage" },
-  { src: "/dr ayoub operating room 2.png", alt: "Dr. Ayoub in the operating room", text: "Board-certified obstetrician-gynecologist" },
+  { src: "/dr ayoub operating room 2.png", alt: "Dr. Ayoub in the operating room", text: "Loudoun County's Top OBGYN Doctor" },
 ];
 
 function HeroSlider() {
@@ -136,7 +136,7 @@ function HeroSlider() {
             </div>
           )}
           {displayedIndex === 1 && (
-            <p className="mt-3 text-center text-[16px] text-white/90 whitespace-nowrap" style={{ fontFamily: "var(--font-sans)" }}>Dr. Ayoub specializes in women's health, pregnancy care and minimally invasive treatments.</p>
+            <p className="mt-3 text-center text-[16px] text-white/90 whitespace-nowrap" style={{ fontFamily: "var(--font-sans)" }}>Dr. Jack Ayoub is board-certified obstetrician-gynecologist specializing in women's health</p>
           )}
         </div>
       </div>
@@ -283,6 +283,45 @@ function HomePage() {
           <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-[500px_1fr] md:gap-16 lg:gap-24">
             <div className="relative"><img src="/proc-mommy.jpg 1.png" alt="Pregnant mother" width={1400} height={933} loading="lazy" className="aspect-[5/4] w-full rounded-lg object-cover object-top" /><p className="mt-4 text-xs text-muted-foreground">Listening. Understanding. Moving forward together.</p></div>
             <div><p className="mb-5 text-xs font-semibold uppercase text-kicker">Women's health services Leesburg VA</p><h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl">Comprehensive care for your growing family!</h2><p className="mt-6 text-base leading-8 text-muted-foreground">We are excited for the opportunity to care for you during your pregnancy. As always, we at Virginia Obstetrics &amp; Gynecology believe that women should always receive the highest quality gynecological and obstetrical care. In our office, we provide comprehensive care for your growing family! We offer In-house ultrasounds, 3D/4D ultrasound packages, Fetal monitoring, Genetic testing, and Cord blood banking. Read more about our OB services.</p></div>
+          </div>
+        </section>
+
+        <section className="py-16 md:py-24 px-6 lg:px-10">
+          <div className="mx-auto max-w-7xl">
+            <p className="mb-3 text-xs font-semibold uppercase text-kicker">Virginia Obstetrics &amp; Gynecology</p>
+            <h2 className="font-display text-3xl font-bold leading-tight md:text-4xl mb-10">Meet Your Care Team</h2>
+            <div className="grid gap-6 md:grid-cols-3">
+              {/* Dr. Ayoub */}
+              <div className="relative overflow-hidden rounded-2xl">
+                <img src="/jack-portrait-1.png" alt="Dr. Jack Ayoub" className="w-full object-cover object-top aspect-[4/5]" />
+                <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-white/95 p-5 shadow-lg">
+                  <p className="text-xs font-semibold text-[#B51307] mb-1">Obstetrician-Gynecologist</p>
+                  <h3 className="font-display text-base font-bold mb-2">Jack P. Ayoub, M.D., F.A.C.O.G.</h3>
+                  <p className="text-sm text-muted-foreground leading-6 mb-3 line-clamp-2">Born and raised in Chantilly, Virginia, and a former chief resident. Dr. Ayoub started this practice so women could be seen and delivered by the same physician — with particular care for high-risk pregnancies.</p>
+                  <a href="#schedule" className="text-sm font-medium text-foreground hover:text-primary flex items-center gap-1">Schedule with Dr. Ayoub <ArrowRight className="size-4" /></a>
+                </div>
+              </div>
+              {/* Katie Glorioso */}
+              <div className="relative overflow-hidden rounded-2xl">
+                <img src="/katie-portrait-1.png" alt="Katie Glorioso" className="w-full object-cover object-top aspect-[4/5]" />
+                <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-white/95 p-5 shadow-lg">
+                  <p className="text-xs font-semibold text-[#B51307] mb-1">Women's Health Nurse Practitioner</p>
+                  <h3 className="font-display text-base font-bold mb-2">Katie Glorioso, MSN, APRN, WHNP-BC</h3>
+                  <p className="text-sm text-muted-foreground leading-6 mb-3 line-clamp-2">Katie grew up in Southern Maryland and moved to Arlington, Virginia, in 2015 to pursue her Bachelor of Science in Nursing at Marymount University.</p>
+                  <a href="#schedule" className="text-sm font-medium text-foreground hover:text-primary flex items-center gap-1">Schedule with Katie <ArrowRight className="size-4" /></a>
+                </div>
+              </div>
+              {/* Leanne Miccio */}
+              <div className="relative overflow-hidden rounded-2xl">
+                <img src="/leanne-portrait-1.png" alt="Leanne Miccio" className="w-full object-cover object-top aspect-[4/5]" />
+                <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-white/95 p-5 shadow-lg">
+                  <p className="text-xs font-semibold text-[#B51307] mb-1">Certified Nurse Midwife</p>
+                  <h3 className="font-display text-base font-bold mb-2">Leanne Miccio, BSN, CNM, MS</h3>
+                  <p className="text-sm text-muted-foreground leading-6 mb-3 line-clamp-2">Over 20 years in women's health. Leanne focuses on prenatal care, annual exams, contraceptive counseling and menstrual concerns — warm, thorough and rooted in partnership.</p>
+                  <a href="#schedule" className="text-sm font-medium text-foreground hover:text-primary flex items-center gap-1">Schedule with Leanne <ArrowRight className="size-4" /></a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
