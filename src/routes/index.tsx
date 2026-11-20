@@ -325,15 +325,27 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="conditions" className="scroll-mt-20 bg-secondary py-16 md:py-24">
+        <section id="services" className="scroll-mt-20 bg-[#F4F4D3] py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
-            <div className="mb-12 max-w-2xl"><p className="mb-5 text-xs font-semibold uppercase text-kicker">Who we help</p><h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl whitespace-nowrap">Whatever pain looks like for you.</h2><p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">Pain can show up in different ways. Start with what you're experiencing — we'll help you understand the next step.</p></div>
-            <div className="grid gap-x-12 md:grid-cols-2">
-              {conditions.map((item) => <a key={item.name} href="#evaluation" className="group grid min-w-0 grid-cols-[88px_minmax(0,1fr)_20px] items-center gap-4 border-t border-border py-6 sm:grid-cols-[112px_minmax(0,1fr)_20px] sm:gap-5">
-                <img src={item.image} alt={item.alt} width={912} height={1104} loading="lazy" className="aspect-square w-full rounded-md object-cover transition-opacity group-hover:opacity-85" />
-                <div><h3 className="font-display text-lg leading-snug sm:text-xl">{item.name}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{item.detail}</p></div>
-                <ArrowUpRight className="size-5 text-primary transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none" />
-              </a>)}
+            <div className="mb-12 max-w-2xl"><p className="mb-5 text-xs font-semibold uppercase text-kicker">What we offer</p><h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl">Our Services</h2></div>
+            <div className="grid gap-10 md:grid-cols-3">
+              {[
+                { title: "Gynecology", items: ["STD Screening","Irregular Menstrual Bleeding","Painful Menses","Ovarian Cysts","Menopause Treatment","Vaginal/Rectal Prolapse","Endometriosis","Myomectomy","Leva Pelvic Health System","Breast Cancer Screening in Leesburg","Pelvic Pain Specialist in Leesburg"] },
+                { title: "Obstetrics", items: ["Dr. Ayoub's Birthing Experience","3D/4D Ultrasound Packages","Expectant Parents","Genetic and Gender Options","Your Body and Changes After Delivery","Postpartum Vaginal Delivery","Postoperative Cesarean Delivery","Prenatal and Postpartum Massage"] },
+                { title: "Surgical", items: ["Biote Hormone Therapy","Minerva Surgery","NovaSure Procedure","Da Vinci Surgery","Postoperative Instructions"] },
+              ].map(({ title, items }) => (
+                <div key={title}>
+                  <h3 className="font-display text-xl font-bold mb-4">{title}</h3>
+                  <ul>
+                    {items.map((item) => (
+                      <li key={item} className="flex items-center gap-3 border-t border-border py-3 text-sm text-muted-foreground">
+                        <ArrowRight className="size-3.5 shrink-0 text-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </section>
