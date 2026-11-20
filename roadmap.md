@@ -1,0 +1,16 @@
+- [x] Build ReNu Pain & Wellness homepage from the strategy deck.
+- [x] Use the requested layout in a dark, non-blue green palette.
+- [x] Create a calm movement hero image suggesting a muscle curve or leaves, without anatomical muscle imagery.
+- [x] Verify desktop and mobile presentation.
+- [x] Replace boxy homepage sections with the selected fluid asymmetric dark-green direction.
+- [x] Keep the scheduling notice and verify desktop and mobile presentation.
+- [x] Select a light, human-centered homepage direction in ReNu brand colors: Airy Welcome.
+- [x] Show additional layout options while keeping the selected palette and typography.
+- [x] Implement the selected layout with Orange County-focused content and verify the presentation.
+- [x] Select a genuinely different full-homepage composition: Personal Care Journey, not hero-only changes.
+- [x] Replace AI-generated people with real stock photography across the homepage.
+- [x] Make the user's supplied photo the hero and verify it on desktop and mobile.
+- [x] Verify desktop and mobile presentation of the current homepage.
+- [x] Replace the hero with the user-supplied clinic lobby photo and verify it on desktop and mobile.
+- [x] Replace the white hero overlay with a transparent dark overlay and white hero text.
+- [x] Lighten the hero dark overlay and remove the hero subtitle line; verify desktop and mobile.

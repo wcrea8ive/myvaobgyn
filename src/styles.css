@@ -1,0 +1,133 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "DM Sans", sans-serif;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sage: var(--sage);
+  --color-kicker: var(--kicker);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-hero-muted: var(--hero-muted);
+  --color-hero-kicker: var(--hero-kicker);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  color-scheme: light;
+  --radius: 0.5rem;
+  --background: #FEFEF0;
+  --foreground: #0F2E3D;
+  --card: #ffffff;
+  --card-foreground: #0F2E3D;
+  --popover: #ffffff;
+  --popover-foreground: #0F2E3D;
+  --primary: #1F6E78;
+  --primary-foreground: #FBFAF7;
+  --sage: #1F6E78;
+  --secondary: color-mix(in srgb, #E5EFF0 65%, #FBFAF7);
+  --secondary-foreground: #0F2E3D;
+  --muted: color-mix(in srgb, #E5EFF0 40%, #FBFAF7);
+  --muted-foreground: #4E6374;
+  --accent: #E5EFF0;
+  --accent-foreground: #0F2E3D;
+  --destructive: #b53c36;
+  --destructive-foreground: #FBFAF7;
+  --border: color-mix(in srgb, #0F2E3D 12%, transparent);
+  --input: color-mix(in srgb, #0F2E3D 22%, transparent);
+  --ring: #1F6E78;
+  --kicker: #1F6E78;
+  --hero-foreground: #ffffff;
+  --hero-muted: color-mix(in srgb, #ffffff 82%, transparent);
+  --hero-kicker: #E5EFF0;
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+  --hero-overlay: linear-gradient(90deg, color-mix(in srgb, #0F2E3D 88%, transparent) 0%, color-mix(in srgb, #0F2E3D 76%, transparent) 34%, color-mix(in srgb, #0F2E3D 54%, transparent) 64%, color-mix(in srgb, #0F2E3D 40%, transparent) 100%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+  ::selection { background-color: var(--color-primary); color: var(--color-primary-foreground); }
+}
+
+html { scroll-behavior: smooth; }
+.font-display { font-weight: 700; }
+
+@keyframes ken-burns {
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.08) translate(-1%, -1.5%); }
+}
+.ken-burns {
+  animation: ken-burns 14s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+.hero-shade { background: var(--hero-overlay); }
+@media (max-width: 767px) { .hero-shade { background: linear-gradient(180deg, color-mix(in srgb, #0F2E3D 88%, transparent) 0%, color-mix(in srgb, #0F2E3D 84%, transparent) 26%, color-mix(in srgb, #0F2E3D 92%, transparent) 33%, color-mix(in srgb, #0F2E3D 92%, transparent) 57%, color-mix(in srgb, #0F2E3D 84%, transparent) 65%, color-mix(in srgb, #0F2E3D 78%, transparent) 100%); } }
+.journey-track::before { content: ""; position: absolute; top: 26px; bottom: 26px; left: 25px; width: 1px; background: var(--border); }
+
+/* Care Journey */
+.care-journey-section { background: color-mix(in srgb, var(--color-accent) 6%, var(--color-background)); }
+@keyframes care-ring-arrive {
+  from { opacity: 0; transform: scale(0.82); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.care-ring-arrive { animation: care-ring-arrive 650ms ease-out forwards; }
+@keyframes care-panel-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.care-panel-enter { animation: care-panel-enter 400ms ease-out forwards; }
+@keyframes care-ring-pulse {
+  0%   { opacity: 1;   transform: scale(1);    }
+  100% { opacity: 0;   transform: scale(1.45); }
+}
+.care-ring-pulse { animation: care-ring-pulse 2s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .care-ring-arrive, .care-ring-pulse, .care-panel-enter { animation: none; }
+  .care-circle { transition: none !important; }
+}
+html { letter-spacing: 0; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
