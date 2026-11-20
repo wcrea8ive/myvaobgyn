@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, ArrowUpRight, Facebook, Instagram, MapPin, Menu, Phone, Twitter, X } from "lucide-react";
-import { useState, useEffect, type ReactNode } from "react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Facebook, Instagram, MapPin, Menu, Phone, X } from "lucide-react";
+import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { CareJourney } from "@/components/CareJourney";
 import {
@@ -88,41 +88,55 @@ const conditions = [
 
 const heroSlides = [
   { src: "/myvaobgyn-office.png", alt: "MyVA OB/GYN office", text: "Keeping women healthy at every life stage" },
-  { src: "/dr ayoub operating room 2.png", alt: "Dr. Ayoub in the operating room", text: "Dr. Jack Ayoub is board-certified obstetrician-gynecologist" },
+  { src: "/dr ayoub operating room 2.png", alt: "Dr. Ayoub in the operating room", text: "Board-certified obstetrician-gynecologist" },
 ];
 
 function HeroSlider() {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [textVisible, setTextVisible] = useState(true);
+  const [displayedIndex, setDisplayedIndex] = useState(0);
+
+  const goToSlide = useCallback((i: number) => {
+    setTextVisible(false);
+    setSelectedIndex(i);
+    setTimeout(() => {
+      setDisplayedIndex(i);
+      setTextVisible(true);
+    }, 1500);
+  }, []);
 
   useEffect(() => {
-    const timer = setInterval(() => setSelectedIndex((i) => (i + 1) % heroSlides.length), 5000);
+    const timer = setInterval(() => goToSlide((selectedIndex + 1) % heroSlides.length), 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [selectedIndex, goToSlide]);
 
   return (
     <section className="relative isolate overflow-hidden bg-card max-h-[80vh]">
       {heroSlides.map((slide, i) => (
         <div
           key={slide.src}
-          className="transition-opacity duration-1000"
+          className="transition-opacity duration-[3000ms]"
           style={{ opacity: i === selectedIndex ? 1 : 0, position: i === 0 ? "relative" : "absolute", inset: 0 }}
         >
           <img src={slide.src} alt={slide.alt} width={1536} height={1024} fetchPriority={i === 0 ? "high" : "auto"} className="w-full h-auto block ken-burns" />
         </div>
       ))}
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/55 to-transparent px-6 pb-8 pt-32 lg:px-10 pointer-events-none">
-        <div className="mx-auto max-w-7xl mb-[10px]">
+        <div className={`mx-auto max-w-7xl transition-opacity duration-500 ${textVisible ? "opacity-100" : "opacity-0"} ${displayedIndex === 0 ? "mb-[10px]" : "mb-[20px]"}`}>
+          <div className="flex justify-center mb-3">
+            <img src="/trust-icons.png" alt="Trust icons" className="h-24 w-auto" />
+          </div>
           <h2
-            className="leading-[1.2] text-white text-[53px] whitespace-nowrap font-light italic text-center w-full"
-            style={{ fontFamily: "Baskerville, 'Baskerville Old Face', 'Book Antiqua', Palatino, serif" }}
-          >{heroSlides[selectedIndex].text}</h2>
-          {selectedIndex === 0 && (
-            <div className="mt-5 pointer-events-auto">
+            className="leading-[1.2] text-white text-[53px] whitespace-nowrap text-center w-full"
+            style={{ fontFamily: "'DM Sans', sans-serif", fontStyle: "normal", fontWeight: 800 }}
+          >{heroSlides[displayedIndex]?.text}</h2>
+          {displayedIndex === 0 && (
+            <div className="mt-5 pointer-events-auto flex justify-center">
               <a href="#schedule" className="inline-flex h-11 items-center rounded-full bg-[#B51307] px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90">Request An Appointment</a>
             </div>
           )}
-          {selectedIndex === 1 && (
-            <p className="mt-3 text-center text-[22px] text-white/90 whitespace-nowrap" style={{ fontFamily: "var(--font-sans)" }}>specializing in women's health, pregnancy care and minimally invasive treatments.</p>
+          {displayedIndex === 1 && (
+            <p className="mt-3 text-center text-[16px] text-white/90 whitespace-nowrap" style={{ fontFamily: "var(--font-sans)" }}>Dr. Ayoub specializes in women's health, pregnancy care and minimally invasive treatments.</p>
           )}
         </div>
       </div>
@@ -130,7 +144,7 @@ function HeroSlider() {
         {heroSlides.map((_, i) => (
           <button
             key={i}
-            onClick={() => setSelectedIndex(i)}
+            onClick={() => goToSlide(i)}
             className={`h-2 rounded-full transition-all ${selectedIndex === i ? "w-6 bg-white" : "w-2 bg-white/50"}`}
             aria-label={`Go to slide ${i + 1}`}
           />
@@ -148,6 +162,7 @@ function HomePage() {
     <div className="min-h-screen overflow-hidden bg-background text-foreground">
       <div className="bg-[#3A7DC9]">
         <div className="mx-auto flex h-8 max-w-7xl items-center justify-end gap-6 px-6 lg:px-10">
+          <div className="flex items-center gap-6 translate-x-10">
           <div className="flex items-center gap-5">
             <a href="#" className="flex items-center gap-1.5 text-[11px] text-white/90 transition-colors hover:text-white">
               <svg className="size-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
@@ -166,33 +181,33 @@ function HomePage() {
             <span className="text-[10px] italic text-white/70">Proudly Part Of</span>
             <img src="/privia-logo.png" alt="Privia Health" className="h-4 w-auto" />
           </div>
+          </div>
         </div>
       </div>
       <div className="bg-[#B51307]">
         <div className="mx-auto flex h-9 max-w-7xl items-center justify-between px-6 lg:px-10">
-          <div className="flex items-center gap-2 text-xs text-white/90">
+          <div className="hidden items-center gap-2 text-xs text-white/90 lg:flex">
             <MapPin className="size-3.5 shrink-0" />
-            <span>1234 E 17th St, Santa Ana, CA 92701</span>
+            <span>19490 Sandridge Way, Suite 350, Leesburg, VA 20176</span>
             <span className="text-white/40">|</span>
-            <span>Same Day Appointments Available!</span>
+            <Phone className="size-3.5 shrink-0" />
+            <span className="font-bold">(703) 858-5599</span>
           </div>
-          <div className="flex items-center gap-4">
-            <a href="tel:+17145550123" className="flex items-center gap-1.5 text-xs text-white/90 transition-colors hover:text-white">
-              <Phone className="size-3.5 shrink-0" />
-              <span>(714) 555-0123</span>
-            </a>
+          <div className="flex items-center gap-4 translate-x-10">
+            <a href="#faq" className="text-xs text-white/90 transition-colors hover:text-white">FAQ</a>
+            <a href="#contact" className="text-xs text-white/90 transition-colors hover:text-white">Contact Us</a>
+            <a href="#biote-store" className="text-xs text-white/90 transition-colors hover:text-white">Biote Store</a>
             <div className="flex items-center gap-3">
               <a href="#" aria-label="Facebook" className="text-white/80 transition-colors hover:text-white"><Facebook className="size-3.5" /></a>
               <a href="#" aria-label="Instagram" className="text-white/80 transition-colors hover:text-white"><Instagram className="size-3.5" /></a>
-              <a href="#" aria-label="Twitter" className="text-white/80 transition-colors hover:text-white"><Twitter className="size-3.5" /></a>
             </div>
           </div>
         </div>
       </div>
       <header className="relative z-30 border-b border-border bg-card">
         <div className="mx-auto grid h-28 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-6 px-6 lg:flex lg:justify-between lg:px-10">
-          <a href="#top" onClick={closeMenu} className="flex min-w-0 items-center gap-3" aria-label="ReNu Pain & Wellness home">
-            <img src="/myvaobgyn-logo-red.png" alt="MyVA OB/GYN" width={154} height={74} className="h-[74px] w-[154px] shrink-0" />
+          <a href="#top" onClick={closeMenu} className="flex shrink-0 items-center gap-3" aria-label="ReNu Pain & Wellness home">
+            <img src="/myvaobgyn-logo-red.png" alt="MyVA OB/GYN" width={154} height={74} className="h-[74px] w-auto" />
           </a>
           <NavigationMenu className="hidden lg:flex" aria-label="Main navigation">
             <NavigationMenuList className="flex-nowrap gap-0">
@@ -228,7 +243,7 @@ function HomePage() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          <div className="hidden lg:block"><Button asChild variant="sage" size="lg" className="h-11 rounded-full px-6 text-xs uppercase"><a href="#schedule">Schedule an evaluation <ArrowUpRight /></a></Button></div>
+          <div className="hidden lg:block"><Button asChild size="lg" className="h-11 rounded-full px-6 text-xs uppercase bg-[#B51307] hover:bg-[#9a1006] text-white"><a href="#schedule">Request An Appointment <ArrowUpRight /></a></Button></div>
           <Button variant="subtle" size="icon" className="shrink-0 rounded-full lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</Button>
         </div>
         {menuOpen && (
@@ -239,7 +254,7 @@ function HomePage() {
             <a onClick={closeMenu} className="py-3 font-medium" href="#">Surgical Services</a>
             <a onClick={closeMenu} className="py-3 font-medium" href="#">New Patients</a>
             <a onClick={closeMenu} className="py-3 font-medium" href="#">Policy Update</a>
-            <a onClick={closeMenu} className="py-3 font-medium text-primary" href="#schedule">Schedule an evaluation <ArrowUpRight className="inline size-4" /></a>
+            <a onClick={closeMenu} className="py-3 font-medium text-[#B51307]" href="#schedule">Request An Appointment <ArrowUpRight className="inline size-4" /></a>
           </nav>
         )}
       </header>
