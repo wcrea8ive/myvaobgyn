@@ -114,7 +114,8 @@ function HeroSlider() {
   }, [selectedIndex, goToSlide, paused]);
 
   return (
-    <section className="relative isolate overflow-hidden bg-card max-h-[80vh]">
+    <section className="relative isolate bg-card">
+      <div className="relative mx-[100px] overflow-hidden max-h-[80vh] rounded-[10px]">
       {heroSlides.map((slide, i) => (
         <div
           key={slide.src}
@@ -163,6 +164,7 @@ function HeroSlider() {
             <svg className="size-3 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
           )}
         </button>
+      </div>
       </div>
     </section>
   );
@@ -218,7 +220,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-      <header className="relative z-30 border-b border-border bg-card">
+      <header className="relative z-30 bg-card">
         <div className="mx-auto grid h-28 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-6 px-6 lg:flex lg:justify-between lg:px-10">
           <a href="#top" onClick={closeMenu} className="flex shrink-0 items-center gap-3" aria-label="ReNu Pain & Wellness home">
             <img src="/myvaobgyn-logo-red.png" alt="MyVA OB/GYN" width={154} height={74} className="h-[74px] w-auto" />
@@ -275,6 +277,7 @@ function HomePage() {
 
       <main id="top">
         <HeroSlider />
+        <div aria-hidden="true" className="h-20 bg-gradient-to-b from-white to-[#FEFEF0]" />
 
         <section className="border-b border-border px-6 py-[70px] lg:px-10">
           <div className="mx-auto flex max-w-7xl flex-col gap-5 md:flex-row md:items-start md:gap-16">
@@ -371,8 +374,7 @@ function HomePage() {
               {/* Header */}
               <div className="mb-12">
                 <p className="mb-5 text-xs font-semibold uppercase text-kicker">Virginia Obstetrics &amp; Gynecology</p>
-                <h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl text-[#B51307]">Care at every stage of a woman's life</h2>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">From your first well-woman visit to pregnancy, birth, recovery and beyond — we are with you at every milestone.</p>
+                <h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl text-[#B51307]">From Your First Visit to Menopause and Beyond</h2>
               </div>
 
               {/* 5-step journey */}
