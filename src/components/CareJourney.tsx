@@ -28,49 +28,49 @@ const STEPS: Step[] = [
   {
     number: "01",
     title: "Listen",
-    detail: "Your full story comes first.",
+    detail: "Your health story comes first.",
     description:
-      "We begin by hearing your full story — what hurts, when it started, and how it affects your daily life. No rushing, no assumptions.",
+      "We begin by hearing your full history — your concerns, symptoms, and goals. Every visit starts with listening, not assumptions.",
     Icon: Ear,
   },
   {
     number: "02",
-    title: "Evaluate",
-    detail: "A focused, thoughtful exam.",
+    title: "Examine",
+    detail: "A thorough, compassionate exam.",
     description:
-      "A thorough physical exam, review of imaging, and careful clinical assessment to understand what's driving your pain.",
+      "A comprehensive examination tailored to your needs — from routine wellness checks to specialized gynecological or obstetrical assessments.",
     Icon: Scan,
   },
   {
     number: "03",
-    title: "Explain",
-    detail: "Clear options, in plain language.",
+    title: "Discuss",
+    detail: "Clear answers in plain language.",
     description:
-      "We walk through findings in plain language, discuss your options honestly, and answer every question before recommending anything.",
+      "We walk through our findings clearly, explain your options honestly, and answer every question before recommending next steps.",
     Icon: MessageSquare,
   },
   {
     number: "04",
-    title: "Treat",
-    detail: "The right first step for you.",
+    title: "Plan",
+    detail: "A care plan built around you.",
     description:
-      "Your goals shape the recommended direction. Together, we discuss a starting point that makes sense for your care.",
+      "Your goals, lifestyle, and preferences shape your personalized care plan — whether that's pregnancy care, gynecological treatment, or preventive wellness.",
     Icon: HeartHandshake,
   },
   {
     number: "05",
-    title: "Measure",
-    detail: "Track what matters in daily life.",
+    title: "Treat",
+    detail: "Expert, compassionate treatment.",
     description:
-      "We track progress using outcomes that matter to you — not just clinical markers, but real improvements in how you function each day.",
+      "From routine care to minimally invasive surgery, we deliver the highest quality treatment with the same physician who knows your history.",
     Icon: BarChart2,
   },
   {
     number: "06",
-    title: "Adjust",
-    detail: "Refine the plan as you progress.",
+    title: "Follow Up",
+    detail: "Continued care at every life stage.",
     description:
-      "Pain care is not static. We revisit your plan regularly and refine it as you heal, grow stronger, and move forward.",
+      "Women's health evolves. We stay with you through every chapter — adjusting your care as your needs change and your life grows.",
     Icon: RefreshCw,
   },
 ];
@@ -131,12 +131,12 @@ export function CareJourney() {
 
           {/* Section heading */}
           <div className="mb-12">
-            <p className="mb-5 text-xs font-semibold uppercase text-kicker">The ReNu care pathway</p>
-            <h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl">
-              Care is a journey.<br />Not a single decision.
+            <p className="mb-5 text-xs font-semibold uppercase text-kicker">Virginia OB/GYN care pathway</p>
+            <h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl text-[#B51307]">
+              Your health, every step<br />of the way.
             </h2>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground">
-              A plan should make sense to you, fit your goals, and evolve as you do. Each step builds on the conversation before it.
+              From your first visit to ongoing care, we are with you at every stage of your women's health journey — with the same trusted team by your side.
             </p>
           </div>
 
@@ -185,7 +185,7 @@ export function CareJourney() {
                         vectorEffect="non-scaling-stroke"
                         style={{
                           stroke: isReached || isActive
-                            ? "color-mix(in srgb, var(--color-primary) 50%, transparent)"
+                            ? "color-mix(in srgb, #B51307 50%, transparent)"
                             : "var(--color-border)",
                           transition: "stroke 600ms ease-in-out",
                         }}
@@ -205,10 +205,10 @@ export function CareJourney() {
                           `care-circle relative ${isActive ? "z-20" : "z-10"} flex h-[120px] w-[120px] items-center justify-center rounded-full border-2`,
                           "transition-all duration-500 ease-in-out lg:h-[140px] lg:w-[140px]",
                           isActive
-                            ? "scale-[1.06] border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                            ? "scale-[1.06] border-[#B51307] bg-[#B51307] text-white shadow-lg shadow-[#B51307]/25"
                             : isReached
-                              ? "border-primary/40 bg-[color-mix(in_srgb,var(--color-primary)_10%,var(--color-background))] text-primary hover:-translate-y-1"
-                              : "border-border bg-background text-muted-foreground hover:-translate-y-1 hover:border-primary/30 hover:bg-muted",
+                              ? "border-[#B51307]/40 bg-[#B51307]/20 text-[#B51307] hover:-translate-y-1"
+                              : "border-border bg-background text-muted-foreground hover:-translate-y-1 hover:border-[#B51307]/30 hover:bg-muted",
                         ].join(" ")}
                       >
                         <s.Icon className="size-8 lg:size-9" strokeWidth={1.5} />
@@ -218,12 +218,12 @@ export function CareJourney() {
                           <>
                             <span
                               aria-hidden
-                              className="care-ring-arrive pointer-events-none absolute inset-0 rounded-full border-2 border-primary/25"
+                              className="care-ring-arrive pointer-events-none absolute inset-0 rounded-full border-2 border-[#B51307]/25"
                               style={{ margin: "-10px" }}
                             />
                             <span
                               aria-hidden
-                              className="care-ring-pulse pointer-events-none absolute inset-0 rounded-full border-2 border-primary/40"
+                              className="care-ring-pulse pointer-events-none absolute inset-0 rounded-full border-2 border-[#B51307]/40"
                               style={{ margin: "-10px" }}
                             />
                           </>
@@ -243,7 +243,7 @@ export function CareJourney() {
                   <span
                     className={[
                       "mt-[22px] text-xs font-semibold uppercase tracking-wide transition-colors duration-300",
-                      isActive ? "text-primary" : "text-muted-foreground",
+                      isActive ? "text-[#B51307]" : "text-muted-foreground",
                     ].join(" ")}
                   >
                     {s.title}
@@ -270,9 +270,9 @@ export function CareJourney() {
               </p>
               <a
                 href="#evaluation"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-opacity hover:opacity-75"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#B51307] transition-opacity hover:opacity-75"
               >
-                Your first visit <ArrowUpRight className="size-4" />
+                Request an appointment <ArrowUpRight className="size-4" />
               </a>
             </div>
             <img

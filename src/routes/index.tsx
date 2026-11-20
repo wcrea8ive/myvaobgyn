@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, ArrowUpRight, Facebook, Instagram, MapPin, Menu, Phone, X } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Facebook, Instagram, MapPin, Menu, Phone, X, Sparkles, HeartHandshake, Baby, HeartPulse, Compass } from "lucide-react";
 import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { CareJourney } from "@/components/CareJourney";
@@ -87,14 +87,15 @@ const conditions = [
 ];
 
 const heroSlides = [
-  { src: "/myvaobgyn-office.png", alt: "MyVA OB/GYN office", text: "Keeping women healthy at every life stage" },
-  { src: "/dr ayoub operating room 2.png", alt: "Dr. Ayoub in the operating room", text: "Loudoun County's Top OBGYN Doctor" },
+  { src: "/myvaobgyn-office.png", alt: "MyVA OB/GYN office", jsx: <>Keeping women <em style={{ color: "#E8160A", fontStyle: "italic" }}>healthy</em> at every life stage</> },
+  { src: "/dr ayoub operating room 2.png", alt: "Dr. Ayoub in the operating room", jsx: <>Loudoun County's <em style={{ color: "#E8160A", fontStyle: "italic" }}>Top</em> OBGYN Doctor</> },
 ];
 
 function HeroSlider() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [textVisible, setTextVisible] = useState(true);
   const [displayedIndex, setDisplayedIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const goToSlide = useCallback((i: number) => {
     setTextVisible(false);
@@ -106,16 +107,18 @@ function HeroSlider() {
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(() => goToSlide((selectedIndex + 1) % heroSlides.length), 5000);
-    return () => clearInterval(timer);
-  }, [selectedIndex, goToSlide]);
+    if (paused) return;
+    const delay = selectedIndex === 0 ? 8000 : 12000;
+    const timer = setTimeout(() => goToSlide((selectedIndex + 1) % heroSlides.length), delay);
+    return () => clearTimeout(timer);
+  }, [selectedIndex, goToSlide, paused]);
 
   return (
     <section className="relative isolate overflow-hidden bg-card max-h-[80vh]">
       {heroSlides.map((slide, i) => (
         <div
           key={slide.src}
-          className="transition-opacity duration-[3000ms]"
+          className="transition-opacity duration-[6000ms]"
           style={{ opacity: i === selectedIndex ? 1 : 0, position: i === 0 ? "relative" : "absolute", inset: 0 }}
         >
           <img src={slide.src} alt={slide.alt} width={1536} height={1024} fetchPriority={i === 0 ? "high" : "auto"} className="w-full h-auto block ken-burns" />
@@ -128,8 +131,8 @@ function HeroSlider() {
           </div>
           <h2
             className="leading-[1.2] text-white text-[53px] whitespace-nowrap text-center w-full"
-            style={{ fontFamily: "'DM Sans', sans-serif", fontStyle: "normal", fontWeight: 800 }}
-          >{heroSlides[displayedIndex]?.text}</h2>
+            style={{ fontFamily: "'Fraunces', serif", fontStyle: "normal", fontWeight: 300 }}
+          >{heroSlides[displayedIndex]?.jsx}</h2>
           {displayedIndex === 0 && (
             <div className="mt-5 pointer-events-auto flex justify-center">
               <a href="#schedule" className="inline-flex h-11 items-center rounded-full bg-[#B51307] px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90">Request An Appointment</a>
@@ -140,7 +143,7 @@ function HeroSlider() {
           )}
         </div>
       </div>
-      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2">
+      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-3">
         {heroSlides.map((_, i) => (
           <button
             key={i}
@@ -149,6 +152,17 @@ function HeroSlider() {
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}
+        <button
+          onClick={() => setPaused(p => !p)}
+          className="ml-1 flex h-6 w-6 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/40 transition-colors"
+          aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+        >
+          {paused ? (
+            <svg className="size-3 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          ) : (
+            <svg className="size-3 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          )}
+        </button>
       </div>
     </section>
   );
@@ -265,7 +279,7 @@ function HomePage() {
         <section className="border-b border-border px-6 py-[70px] lg:px-10">
           <div className="mx-auto flex max-w-7xl flex-col gap-5 md:flex-row md:items-start md:gap-16">
             <div className="w-full max-w-[500px] shrink-0">
-              <h2 className="font-display text-4xl font-medium md:text-5xl">Welcome to<br />Virginia Obstetrics<br />&amp; Gynecology,<br /><span className="text-2xl md:text-3xl font-normal mt-[20px] mb-[10px] block">Loudoun County's premier<br />OBGYN practice.</span></h2>
+              <h2 className="font-display text-4xl font-medium md:text-5xl">Welcome to<br /><span className="text-[#B51307]">Virginia Obstetrics<br />&amp; Gynecology,</span><br /><span className="text-2xl md:text-3xl font-normal mt-[20px] mb-[10px] block">Loudoun County's premier<br />OBGYN practice.</span></h2>
               <div className="mt-5 flex items-center gap-4">
                 <img src="/Polished Top Doctor Gold Seal.png" alt="Polished Top Doctor Gold Seal" className="h-[164px] w-auto" />
                 <img src="/Silver Top Doctor Medical Medallion.png" alt="Silver Top Doctor Medical Medallion" className="h-[164px] w-auto" />
@@ -282,14 +296,14 @@ function HomePage() {
         <section className="py-16 md:py-24 bg-[#F7F7DE] px-6 lg:px-10">
           <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-[500px_1fr] md:gap-16 lg:gap-24">
             <div className="relative"><img src="/proc-mommy.jpg 1.png" alt="Pregnant mother" width={1400} height={933} loading="lazy" className="aspect-[5/4] w-full rounded-lg object-cover object-top" /><p className="mt-4 text-xs text-muted-foreground">Listening. Understanding. Moving forward together.</p></div>
-            <div><p className="mb-5 text-xs font-semibold uppercase text-kicker">Women's health services Leesburg VA</p><h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl">Comprehensive care for your growing family!</h2><p className="mt-6 text-base leading-8 text-muted-foreground">We are excited for the opportunity to care for you during your pregnancy. As always, we at Virginia Obstetrics &amp; Gynecology believe that women should always receive the highest quality gynecological and obstetrical care. In our office, we provide comprehensive care for your growing family! We offer In-house ultrasounds, 3D/4D ultrasound packages, Fetal monitoring, Genetic testing, and Cord blood banking. Read more about our OB services.</p></div>
+            <div><p className="mb-5 text-xs font-semibold uppercase text-kicker">Women's health services Leesburg VA</p><h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl text-[#B51307]">Comprehensive care for your growing family!</h2><p className="mt-6 text-base leading-8 text-muted-foreground">We are excited for the opportunity to care for you during your pregnancy. As always, we at Virginia Obstetrics &amp; Gynecology believe that women should always receive the highest quality gynecological and obstetrical care. In our office, we provide comprehensive care for your growing family! We offer In-house ultrasounds, 3D/4D ultrasound packages, Fetal monitoring, Genetic testing, and Cord blood banking. Read more about our OB services.</p></div>
           </div>
         </section>
 
         <section className="py-16 md:py-24 px-6 lg:px-10">
           <div className="mx-auto max-w-7xl">
             <p className="mb-3 text-xs font-semibold uppercase text-kicker">Virginia Obstetrics &amp; Gynecology</p>
-            <h2 className="font-display text-3xl font-bold leading-tight md:text-4xl mb-10">Meet Your Care Team</h2>
+            <h2 className="font-display text-3xl font-bold leading-tight md:text-4xl mb-10 text-[#B51307]">Meet Your Care Team</h2>
             <div className="grid gap-6 md:grid-cols-3">
               {/* Dr. Ayoub */}
               <div className="relative overflow-hidden rounded-2xl">
@@ -325,9 +339,9 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="services" className="scroll-mt-20 bg-[#F4F4D3] py-16 md:py-24">
+        <section id="services" className="scroll-mt-20 bg-[#F7F7DE] py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
-            <div className="mb-12 max-w-2xl"><p className="mb-5 text-xs font-semibold uppercase text-kicker">What we offer</p><h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl">Our Services</h2></div>
+            <div className="mb-12 max-w-2xl"><p className="mb-5 text-xs font-semibold uppercase text-kicker">What we offer</p><h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl text-[#B51307]">Our Services</h2></div>
             <div className="grid gap-10 md:grid-cols-3">
               {[
                 { title: "Gynecology", items: ["STD Screening","Irregular Menstrual Bleeding","Painful Menses","Ovarian Cysts","Menopause Treatment","Vaginal/Rectal Prolapse","Endometriosis","Myomectomy","Leva Pelvic Health System","Breast Cancer Screening in Leesburg","Pelvic Pain Specialist in Leesburg"] },
@@ -350,7 +364,58 @@ function HomePage() {
           </div>
         </section>
 
-        <CareJourney />
+        <section className="py-16 md:py-24 px-6 lg:px-10">
+          <div className="mx-auto max-w-7xl">
+            <div className="p-0">
+
+              {/* Header */}
+              <div className="mb-12">
+                <p className="mb-5 text-xs font-semibold uppercase text-kicker">Virginia Obstetrics &amp; Gynecology</p>
+                <h2 className="font-display text-3xl leading-tight md:text-4xl lg:text-5xl text-[#B51307]">Care at every stage of a woman's life</h2>
+                <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">From your first well-woman visit to pregnancy, birth, recovery and beyond — we are with you at every milestone.</p>
+              </div>
+
+              {/* 5-step journey */}
+              <div className="grid grid-cols-2 gap-8 md:grid-cols-5 md:gap-4 relative">
+                {[
+                  { num: "1", Icon: Sparkles, title: "First visit", desc: "A well-woman exam, contraception counseling and vaccines — unhurried, and never talked down to.", tags: "Annual exam · contraception · vaccines" },
+                  { num: "2", Icon: HeartHandshake, title: "Planning ahead", desc: "A preconception visit to review health history, genetics and what to expect before you try.", tags: "Preconception visit · genetic & gender options" },
+                  { num: "3", Icon: Baby, title: "Pregnancy", desc: "Prenatal visits with imaging down the hall — the same team from your first positive test to the delivery room.", tags: "In-house ultrasound · 3D/4D keepsakes" },
+                  { num: "4", Icon: HeartPulse, title: "Birth & recovery", desc: "Delivery at StoneSprings with your own physician, then a six-week check and pelvic-floor guidance.", tags: "StoneSprings Hospital · 6-week recovery check" },
+                  { num: "5", Icon: Compass, title: "Midlife & beyond", desc: "Menopause care, hormone therapy and breast health — the check-ups that keep the next decades yours.", tags: "Menopause care · hormone therapy · breast screening" },
+                ].map(({ num, Icon, title, desc, tags }) => (
+                  <div key={num} className="flex flex-col items-center text-center">
+                    <div className="relative mb-4">
+                      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white border border-[#D4C5A9]">
+                        <Icon className="size-7 text-[#B51307]" strokeWidth={1.5} />
+                      </div>
+                    </div>
+                    <h3 className="font-display text-lg font-semibold mb-2">{title}</h3>
+                    <p className="text-xs leading-5 text-muted-foreground mb-4">{desc}</p>
+                    <div className="rounded-full border border-[#D4C5A9] bg-white px-3 py-1.5 text-xs text-muted-foreground leading-5">{tags}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Stats */}
+              <div className="mt-12 grid grid-cols-2 gap-8 border-t border-[#D4C5A9] pt-10 md:grid-cols-4">
+                {[
+                  { stat: "≈5,000", desc: "pregnancies managed across Dr. Ayoub's career" },
+                  { stat: "17%", desc: "cesarean rate last year — one of the area's lowest, per Privia" },
+                  { stat: "3D/4D", desc: "ultrasound keepsakes, with fetal monitoring and genetic testing in-house" },
+                  { stat: "20+", desc: "years in women's health for Leanne Miccio, certified nurse midwife" },
+                ].map(({ stat, desc }) => (
+                  <div key={stat}>
+                    <p className="font-display text-3xl md:text-4xl text-[#B51307] mb-2">{stat}</p>
+                    <p className="text-sm leading-6 text-muted-foreground">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="mt-8 text-[11px] text-muted-foreground/70">Figures come from the practice's published information — please call the office to confirm anything that affects your care or coverage.</p>
+            </div>
+          </div>
+        </section>
 
         <section id="evaluation" className="scroll-mt-20 border-y border-border bg-secondary py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">

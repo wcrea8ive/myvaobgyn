@@ -6,7 +6,7 @@
 
 @theme inline {
   --font-sans: "DM Sans", sans-serif;
-  --font-display: "DM Sans", sans-serif;
+  --font-display: "Fraunces", serif;
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
@@ -94,7 +94,7 @@
 }
 
 html { scroll-behavior: smooth; }
-.font-display { font-weight: 700; }
+.font-display { font-weight: 300; line-height: 1.2; }
 
 @keyframes ken-burns {
   from { transform: scale(1) translate(0, 0); }
